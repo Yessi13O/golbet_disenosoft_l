@@ -21,14 +21,21 @@ public class MatchesController : Controller
 
     }
 
-    // GET /Matches            -> all matches
-    // GET /Matches?status=Scheduled -> filtered board
-    public async Task<IActionResult> Index(MatchStatus? status)
+    //Changes #6
+    // GET /Matches                                    -> all matches
+    // GET /Matches?status=Scheduled                   -> filtered by status
+    // GET /Matches?search=<team name>                 -> filtered by home or away team name
+    // GET /Matches?status=Scheduled&search=<team name> -> both filters combined
+    public async Task<IActionResult> Index(MatchStatus? status, string? search)
     {
+        search = string.IsNullOrWhiteSpace(search) ? null : search.Trim();
+
         ViewBag.CurrentStatus = status;
-        var board = await _matchService.GetBoardAsync(status);
+        ViewBag.CurrentSearch = search;   // so the view keeps the typed text and the links
+        var board = await _matchService.GetBoardAsync(status, search);
         return View(board);
     }
+
 
     // GET /Matches/Detail/3
     public async Task<IActionResult> Detail(int id)

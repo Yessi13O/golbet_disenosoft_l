@@ -8,7 +8,21 @@
 
 @{
     var current = (MatchStatus?)ViewBag.CurrentStatus;
+    var search = (string?)ViewBag.CurrentSearch;
 }
+
+@* Search form: GET, so the URL carries the search text //Change #7 *@ 
+<form asp-action="Index" method="get" class="d-flex gap-2 mb-3" role="search">
+    @if (current.HasValue)
+    {
+        <input type="hidden" name="status" value="@current" />
+    }
+    <input type="search" name="search" value="@search" maxlength="80"
+           class="form-control" placeholder="Buscar partidos por equipo..."
+           aria-label="Buscar partidos por equipo" />
+    <button type="submit" class="btn btn-success">Buscar</button>
+</form>
+
 <div class="d-flex gap-2 flex-wrap mb-4">
     <a asp-action="Index"
        class="btn btn-sm @(current is null ? "btn-success" : "btn-outline-success")">
