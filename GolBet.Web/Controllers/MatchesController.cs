@@ -29,7 +29,6 @@ public class MatchesController : Controller
     public async Task<IActionResult> Index(MatchStatus? status, string? search)
     {
         search = string.IsNullOrWhiteSpace(search) ? null : search.Trim();
-
         ViewBag.CurrentStatus = status;
         ViewBag.CurrentSearch = search;   // so the view keeps the typed text and the links
         var board = await _matchService.GetBoardAsync(status, search);
