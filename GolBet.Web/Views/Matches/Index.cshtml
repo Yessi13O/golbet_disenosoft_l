@@ -8,7 +8,7 @@
 
 @{
     var current = (MatchStatus?)ViewBag.CurrentStatus;
-    var search = (string?)ViewBag.CurrentSearch;
+    var search = (string?)ViewBag.CurrentSearch;////Changes #6
 }
 
 @* Search form: GET, so the URL carries the search text //Change #7 *@ 
@@ -51,7 +51,7 @@
 
 </div>
 
-@if (!Model.Any())
+@if (!Model.Any())//Change #8
 {
     <div class="text-center py-5">
         <h1 class="display-1">🔍</h1>
